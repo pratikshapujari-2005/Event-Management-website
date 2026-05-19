@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">🎓 EventStream Portal</a>
+            <span class="navbar-text ms-auto text-white">
+                **📝 Event Registration Form**
+            </span>
+        </div>
+    </nav>
+    <main class="container my-5">
+        <h2 class="text-center mb-4 fw-bold">Register for an Event</h2>
+        <div class="form-section bg-white">
+            <form id="registrationForm">
+                <div class="alert alert-primary fw-bold" role="alert">
+                    Logged in as John Doe (john.doe@college.edu). Details are pre-filled for a streamlined experience.
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="regName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="regName" value="John Doe" disabled>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="regEmail" class="form-label">College Email</label>
+                        <input type="email" class="form-control" id="regEmail" value="john.doe@college.edu" disabled>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="regEvent" class="form-label">Select Event <span class="text-danger">*</span></label>
+                    <select class="form-select" id="regEvent" required>
+                        <option selected disabled value="">Choose the event you wish to attend...</option>
+                        <option value="CodeSpark">Annual Tech Fest 2026: CodeSpark Challenge</option>
+                        <option value="Debate">Inter-College Debate Competition</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="regTeamName" class="form-label">Team Name/Affiliation (if applicable)</label>
+                    <input type="text" class="form-control" id="regTeamName" placeholder="E.g., Team Innovate or N/A">
+                </div>
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
+                    <label class="form-check-label" for="flexCheckDefault">
+                        I confirm all details are correct and agree to the event guidelines.
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100">Complete Registration</button>
+                <div id="registrationMessage" class="mt-3 text-center d-none alert alert-success fw-bold"></div>
+            </form>
+        </div>
+    </main>
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0">&copy; 2026 EventStream Portal. Streamlining Registration.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const eventName = document.getElementById('regEvent').options[document.getElementById('regEvent').selectedIndex].text;
+            const messageDiv = document.getElementById('registrationMessage');
+            messageDiv.textContent = `✅ Success! You're registered for ${eventName}. Your QR Ticket ID is now visible on your dashboard. Redirecting...`;
+            messageDiv.classList.remove('d-none');
+            this.reset();
+            setTimeout(() => {
+                // Redirect back to main page after success
+                window.location.href = 'index.html#schedule';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
